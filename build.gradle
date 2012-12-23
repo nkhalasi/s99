@@ -1,0 +1,41 @@
+apply plugin: 'scala'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    scalaTools 'org.scala-lang:scala-compiler:2.9.2'
+    compile 'org.scala-lang:scala-library:2.9.2'
+    testCompile 'org.scalatest:scalatest_2.9.2:2.0.M4'
+    testCompile 'junit:junit:4.10'
+}
+
+
+tasks.withType(ScalaCompile) {
+    scalaCompileOptions.useAnt = false
+}
+
+
+test << {
+    ant.taskdef(name: 'scalatest',
+                classname: 'org.scalatest.tools.ScalaTestAntTask',
+                classpath: classpath.asPath)
+    ant.scalatest(runpath: testClassesDir,
+                    haltonfailure: 'true',
+                    fork: 'false') {
+        reporter(type: 'stdout')
+    }
+}
+
+/*
+task test(overwrite: true, dependsOn: testClasses) << {
+    ant.taskdef(name: 'scalatest',
+            classname: 'org.scalatest.tools.ScalaTestAntTask',
+            classpath: sourceSets.test.runtimeClasspath.asPath
+    )
+    ant.scalatest(runpath: sourceSets.test.classesDir,
+            haltonfailure: 'true',
+            fork: 'false') {reporter(type: 'stdout')}
+}
+*/
