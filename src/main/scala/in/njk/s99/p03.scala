@@ -6,6 +6,9 @@
 
 package in.njk.s99
 
+/**
+ * Find the Kth element of a list.
+ */
 object P03 {
     def nth[T](n: Int, xs: List[T]): T =
         if (xs isEmpty) throw new NoSuchElementException
