@@ -17,6 +17,8 @@ tasks.withType(ScalaCompile) {
 }
 
 
+test.dependsOn cleanTest
+
 test << {
     ant.taskdef(name: 'scalatest',
                 classname: 'org.scalatest.tools.ScalaTestAntTask',
@@ -28,14 +30,3 @@ test << {
     }
 }
 
-/*
-task test(overwrite: true, dependsOn: testClasses) << {
-    ant.taskdef(name: 'scalatest',
-            classname: 'org.scalatest.tools.ScalaTestAntTask',
-            classpath: sourceSets.test.runtimeClasspath.asPath
-    )
-    ant.scalatest(runpath: sourceSets.test.classesDir,
-            haltonfailure: 'true',
-            fork: 'false') {reporter(type: 'stdout')}
-}
-*/
