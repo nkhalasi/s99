@@ -3,6 +3,7 @@
 
 # sbt specific
 dist/*
+build/*
 target/
 lib_managed/
 src_managed/
@@ -14,6 +15,7 @@ project/plugins/project/
 
 # Gradle specfic
 .gradle/
+gradle-app.setting
 
 # Intellij IDEA specfic
 *.iml
